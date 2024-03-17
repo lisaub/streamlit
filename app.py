@@ -65,36 +65,40 @@ def generate_travel_suggestions(user_input):
     return response.choices[0].message.content.strip()
 
 def main():
-    st.title("Travel Helper")
+    st.title("Travalser: Tu Asistente de Viajes Personalizado")
 
-    origin_country = st.text_input("Country of Origin")
-    origin_city = st.text_input("City of Origin")
-    st.markdown("*Please enter your country and city of origin. This information will help us provide more tailored suggestions.*")
-    gender = st.radio("Select Gender", ("Male", "Female"))
-    age = st.slider("Select Age", 1, 100, 18)
-    travel_style = st.selectbox("Select Travel Style", ("Explore", "Adventure", "Relax", "Wellness"))
-    destination_country = st.text_input("Destination Country")
-    destination_city = st.text_input("Destination City")
-    st.markdown("*Please enter your destination country and city. This information will help us provide more tailored suggestions.*")
-    travel_date = st.date_input("Select Travel Date")
-    num_travelers = st.number_input("Number of Travelers", min_value=1, value=1)
+    st.markdown("Bienvenido a Travalser, tu asistente de viajes personalizado. Completa la siguiente información para recibir recomendaciones y sugerencias para tu próximo viaje.")
 
-    if st.button("Plan My Trip"):
-        user_input = f"- Origin: {origin_country}, {origin_city}\n- Destination: {destination_country}, {destination_city}\n- Travel Dates: {travel_date}\n- Travel Style: {travel_style}\n- Number of Travelers: {num_travelers}"
+    # Aquí puedes incluir una breve descripción de la aplicación y su funcionalidad.
+
+    origin_country = st.text_input("País de Origen")
+    origin_city = st.text_input("Ciudad de Origen")
+    st.markdown("*Por favor, ingresa tu país y ciudad de origen. Esta información nos ayudará a proporcionar sugerencias más personalizadas.*")
+    gender = st.radio("Selecciona Género", ("Masculino", "Femenino"))
+    age = st.slider("Selecciona Edad", 1, 100, 18)
+    travel_style = st.selectbox("Selecciona Estilo de Viaje", ("Explorar", "Aventura", "Relax", "Bienestar"))
+    destination_country = st.text_input("País de Destino")
+    destination_city = st.text_input("Ciudad de Destino")
+    st.markdown("*Por favor, ingresa tu país y ciudad de destino. Esta información nos ayudará a proporcionar sugerencias más personalizadas.*")
+    travel_date = st.date_input("Selecciona Fecha de Viaje")
+    num_travelers = st.number_input("Número de Viajeros", min_value=1, value=1)
+
+    if st.button("Planificar Mi Viaje"):
+        user_input = f"- Origen: {origin_country}, {origin_city}\n- Destino: {destination_country}, {destination_city}\n- Fechas de Viaje: {travel_date}\n- Estilo de Viaje: {travel_style}\n- Número de Viajeros: {num_travelers}"
         suggestions = generate_travel_suggestions(user_input)
 
-        st.write("Here are your personalized travel suggestions:")
+        st.write("Aquí tienes tus sugerencias de viaje personalizadas:")
         st.write(suggestions)
 
-        # Display additional information based on destination country
+        # Muestra información adicional basada en el país de destino
         if destination_country in country_info:
-            st.write("Additional Information:")
-            st.write(f"- Visa Required: {'Yes' if country_info[destination_country].get('visa_required') else 'No'}")
-            st.write(f"- Currency: {country_info[destination_country].get('currency')}")
-            st.write(f"- Electricity Adapter Type: {country_info[destination_country].get('electricity_adapter')}")
-            st.write(f"- Drinking Water Safety: {country_info[destination_country].get('water_safety')}")
+            st.write("Información Adicional:")
+            st.write(f"- ¿Se requiere Visa?: {'Sí' if country_info[destination_country].get('visa_required') else 'No'}")
+            st.write(f"- Moneda: {country_info[destination_country].get('currency')}")
+            st.write(f"- Tipo de Adaptador Eléctrico: {country_info[destination_country].get('electricity_adapter')}")
+            st.write(f"- Seguridad del Agua Potable: {country_info[destination_country].get('water_safety')}")
         else:
-            st.write("Additional information not available for this destination.")
+            st.write("Información adicional no disponible para este destino.")
 
 if __name__ == "__main__":
     main()
