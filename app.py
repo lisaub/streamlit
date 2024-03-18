@@ -80,9 +80,12 @@ def principal():
     st.markdown("*Por favor, ingresa tu país y ciudad de destino. Esta información nos ayudará a proporcionar sugerencias más personalizadas.*")
     fecha_viaje = st.date_input("Selecciona Fecha de Viaje")
     num_viajeros = st.number_input("Número de Viajeros", min_value=1, value=1)
+    
+    st.markdown("### Información Adicional:")
+    additional_info = st.text_area("Agrega información adicional o preguntas aquí", height=100)
 
     if st.button("Planificar Mi Viaje"):
-        entrada_usuario = f"- Origen: {pais_origen}, {ciudad_origen}\n- Destino: {pais_destino}, {ciudad_destino}\n- Fechas de Viaje: {fecha_viaje}\n- Estilo de Viaje: {estilo_viaje}\n- Número de Viajeros: {num_viajeros}"
+        entrada_usuario = f"- Origen: {pais_origen}, {ciudad_origen}\n- Destino: {pais_destino}, {ciudad_destino}\n- Fechas de Viaje: {fecha_viaje}\n- Estilo de Viaje: {estilo_viaje}\n- Número de Viajeros: {num_viajeros}\n\nInformación Adicional:\n{additional_info}"
         sugerencias = generar_sugerencias_de_viaje(entrada_usuario)
 
         st.write("Aquí tienes tus sugerencias de viaje personalizadas:")
@@ -97,9 +100,6 @@ def principal():
             st.write(f"- Seguridad del Agua Potable: {info_paises[pais_destino].get('seguridad_del_agua')}")
         else:
             st.write("Información adicional no disponible para este destino.")
-            
-    st.markdown("### Información Adicional:")
-    additional_info = st.text_area("Agrega información adicional o preguntas aquí", height=100)
 
 if __name__ == "__main__":
     principal()
