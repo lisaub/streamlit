@@ -72,6 +72,9 @@ def principal():
     st.markdown("### Cómo Funciona:")
     st.markdown("Travalser, tu asistente de viajes personalizado, aprovecha la tecnología avanzada de IA para adaptar recomendaciones de viaje a tus preferencias. Simplemente ingresa detalles como tus países de origen y destino, fechas de viaje y estilo de viaje. Una vez que presiones 'Planificar Mi Viaje', Travalser generará sugerencias de viaje personalizadas que incluyen actividades, alojamientos, opciones de restaurantes y más. Además, proporciona información de viaje esencial como requisitos de visa, moneda, tipos de adaptadores eléctricos y seguridad del agua para tu destino. Espera sugerencias perspicaces y personalizadas que mejoren tu experiencia de viaje, haciendo que cada viaje sea inolvidable.")
 
+    st.markdown("### Información Adicional:")
+    additional_info = st.text_area("Agrega información adicional o preguntas aquí", height=100)
+
     pais_origen = st.text_input("País de Origen")
     ciudad_origen = st.text_input("Ciudad de Origen")
     st.markdown("*Por favor, ingresa tu país y ciudad de origen. Esta información nos ayudará a proporcionar sugerencias más personalizadas.*")
@@ -85,7 +88,7 @@ def principal():
     num_viajeros = st.number_input("Número de Viajeros", min_value=1, value=1)
 
     if st.button("Planificar Mi Viaje"):
-        entrada_usuario = f"- Origen: {pais_origen}, {ciudad_origen}\n- Destino: {pais_destino}, {ciudad_destino}\n- Fechas de Viaje: {fecha_viaje}\n- Estilo de Viaje: {estilo_viaje}\n- Número de Viajeros: {num_viajeros}"
+        entrada_usuario = f"- Origen: {pais_origen}, {ciudad_origen}\n- Destino: {pais_destino}, {ciudad_destino}\n- Fechas de Viaje: {fecha_viaje}\n- Estilo de Viaje: {estilo_viaje}\n- Número de Viajeros: {num_viajeros}\n\nInformación Adicional:\n{additional_info}"
         sugerencias = generar_sugerencias_de_viaje(entrada_usuario)
 
         st.write("Aquí tienes tus sugerencias de viaje personalizadas:")
