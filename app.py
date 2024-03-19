@@ -1,4 +1,3 @@
-# app.py
 import streamlit as st
 from openai import OpenAI
 from dotenv import load_dotenv
@@ -69,8 +68,8 @@ def principal():
 
     st.markdown("Bienvenido a Travalser, tu asistente de viajes personalizado. Completa la siguiente información para recibir recomendaciones y sugerencias para tu próximo viaje.")
 
-st.markdown("### Cómo Funciona:")
-st.markdown("Travalser, tu asistente de viajes personalizado, aprovecha la tecnología avanzada de IA para adaptar recomendaciones de viaje a tus preferencias. Simplemente ingresa detalles como tus países de origen y destino, fechas de viaje y estilo de viaje. Una vez que presiones 'Planificar Mi Viaje', Travalser generará sugerencias de viaje personalizadas que incluyen actividades, alojamientos, opciones de restaurantes y más. Además, proporciona información de viaje esencial como requisitos de visa, moneda, tipos de adaptadores eléctricos y seguridad del agua para tu destino. Espera sugerencias perspicaces y personalizadas que mejoren tu experiencia de viaje, haciendo que cada viaje sea inolvidable.")
+    st.markdown("### Cómo Funciona:")
+    st.markdown("Travalser, tu asistente de viajes personalizado, aprovecha la tecnología avanzada de IA para adaptar recomendaciones de viaje a tus preferencias. Simplemente ingresa detalles como tus países de origen y destino, fechas de viaje y estilo de viaje. Una vez que presiones 'Planificar Mi Viaje', Travalser generará sugerencias de viaje personalizadas que incluyen actividades, alojamientos, opciones de restaurantes y más. Además, proporciona información de viaje esencial como requisitos de visa, moneda, tipos de adaptadores eléctricos y seguridad del agua para tu destino. Espera sugerencias perspicaces y personalizadas que mejoren tu experiencia de viaje, haciendo que cada viaje sea inolvidable.")
 
     pais_origen = st.text_input("País de Origen")
     ciudad_origen = st.text_input("Ciudad de Origen")
