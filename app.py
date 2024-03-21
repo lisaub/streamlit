@@ -77,7 +77,7 @@ def principal():
     genero = st.radio("Selecciona Género", ("Masculino", "Femenino"))
     edad = st.slider("Selecciona Edad", 1, 100, 18)
     estilo_viaje = st.selectbox("Selecciona Estilo de Viaje", ("Explorar", "Aventura", "Relax", "Bienestar"))
-    pais_destino = st.selectbox("País de Destino", options=list(info_paises.keys()))
+    pais_destino = st.selectbox("País de Destino", options=list(info_paises.keys()), index=0)
     ciudad_destino = st.text_input("Ciudad de Destino")
     st.markdown("*Por favor, ingresa tu país y ciudad de destino. Esta información nos ayudará a proporcionar sugerencias más personalizadas.*")
     fecha_viaje = st.date_input("Selecciona Fecha de Viaje")
