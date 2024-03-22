@@ -3,13 +3,13 @@ from openai import OpenAI
 from dotenv import load_dotenv
 import os
 
-# Cargar variables de entorno desde el archivo .env
+# Load environment variables from the .env file
 load_dotenv()
 
-# Establecer tu clave de API de OpenAI
+# Set your OpenAI API key
 cliente = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
-# Diccionario de información de países
+# Dictionary of country information
 info_paises = {
     "Estados Unidos": {
         "visa_requerida": False,
@@ -46,14 +46,14 @@ info_paises = {
         "moneda": "EUR",
         "adaptador_de_electricidad": "Tipo C, F"
     },
-    # Agregar más países según sea necesario
+    # Add more countries as needed
 }
 
 def generar_sugerencias_de_viaje(entrada_usuario):
-    # Prompt adicional para cosas que llevar, requisitos de visa, vacunas y adaptadores de electricidad
+    # Additional prompt for things to bring, visa requirements, vaccines, and electricity adapters
     prompt = f"Dados los siguientes detalles sobre mi próximo viaje:\n\n{entrada_usuario}\n\nPor favor, proporciona sugerencias de viaje personalizadas, incluyendo cosas que hacer, lugares para alojarse, restaurantes recomendados y cualquier otra información relevante basada en los detalles proporcionados.\n\nAdemás, incluye información sobre cosas que llevar, requisitos de visa, vacunas necesarias y adaptadores de electricidad específicos para el destino."
     respuesta = cliente.chat.completions.create(
-        model="gpt-3.5-turbo",  # Especificar el motor GPT-3
+        model="gpt-3.5-turbo",  # Specify the GPT-3 engine
         messages=[
             {
                 "role": "usuario",
@@ -84,27 +84,26 @@ def principal():
     num_viajeros = st.number_input("Número de Viajeros", min_value=1, value=1)
 
     if st.button("Planificar Mi Viaje"):
-    # Append age and gender to the entrada_usuario string
-    entrada_usuario = f"- Origen: {pais_origen}, {ciudad_origen}\n- Destino: {pais_destino}, {ciudad_destino}\n- Fechas de Viaje: {fecha_viaje}\n- Estilo de Viaje: {estilo_viaje}\n- Número de Viajeros: {num_viajeros}\n- Género: {genero}\n- Edad: {edad}"
+        # Append age and gender to the entrada_usuario string
+        entrada_usuario = f"- Origen: {pais_origen}, {ciudad_origen}\n- Destino: {pais_destino}, {ciudad_destino}\n- Fechas de Viaje: {fecha_viaje}\n- Estilo de Viaje: {estilo_viaje}\n- Número de Viajeros: {num_viajeros}\n- Género: {genero}\n- Edad: {edad}"
 
-    st.write("Detalles de tu Viaje:")
-    st.write(entrada_usuario)
+        st.write("Detalles de tu Viaje:")
+        st.write(entrada_usuario)
 
-    sugerencias = generar_sugerencias_de_viaje(entrada_usuario)
+        sugerencias = generar_sugerencias_de_viaje(entrada_usuario)
 
-    st.write("Aquí tienes tus sugerencias de viaje personalizadas:")
-    st.write(sugerencias)
+        st.write("Aquí tienes tus sugerencias de viaje personalizadas:")
+        st.write(sugerencias)
 
-    # Muestra información adicional basada en el país de destino
-    if pais_destino in info_paises:
-        st.write("Información Adicional:")
-        st.write(f"- ¿Se requiere Visa?: {'Sí' if info_paises[pais_destino].get('visa_requerida') else 'No'}")
-        st.write(f"- Moneda: {info_paises[pais_destino].get('moneda')}")
-        st.write(f"- Tipo de Adaptador Eléctrico: {info_paises[pais_destino].get('adaptador_de_electricidad')}")
-        st.write(f"- Seguridad del Agua Potable: {info_paises[pais_destino].get('seguridad_del_agua')}")
-    else:
-        st.write("Información adicional no disponible para este destino.")
-
+        # Show additional information based on the destination country
+        if pais_destino in info_paises:
+            st.write("Información Adicional:")
+            st.write(f"- ¿Se requiere Visa?: {'Sí' if info_paises[pais_destino].get('visa_requerida') else 'No'}")
+            st.write(f"- Moneda: {info_paises[pais_destino].get('moneda')}")
+            st.write(f"- Tipo de Adaptador Eléctrico: {info_paises[pais_destino].get('adaptador_de_electricidad')}")
+            st.write(f"- Seguridad del Agua Potable: {info_paises[pais_destino].get('seguridad_del_agua')}")
+        else:
+            st.write("Información adicional no disponible para este destino.")
 
 
 if __name__ == "__main__":
