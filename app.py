@@ -105,5 +105,6 @@ def principal():
     else:
         st.write("Información adicional no disponible para este destino.")
 
+
 if __name__ == "__main__":
     principal()
