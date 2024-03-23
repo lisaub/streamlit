@@ -7,17 +7,17 @@ import os
 load_dotenv()
 
 # Get your OpenAI API key from secrets or environment variables
-api_key = st.secrets.get("openai", {}).get("api_key") or os.getenv("OPENAI_API_KEY")
+# api_key = st.secrets.get("openai", {}).get("api_key") or os.getenv("OPENAI_API_KEY")
 
 # Check if the API key is available
-if api_key is None:
-    st.error("OpenAI API key is not available. Please make sure it's set up correctly.")
-else:
+#if api_key is None:
+#    st.error("OpenAI API key is not available. Please make sure it's set up correctly.")
+#else:
     # Initialize the OpenAI client
-    cliente = OpenAI(api_key=api_key)
+#    cliente = OpenAI(api_key=api_key)
 
 # Set your OpenAI API key
-# cliente = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+cliente = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 # Dictionary of country information
 info_paises = {
@@ -61,7 +61,8 @@ info_paises = {
 
 def generar_sugerencias_de_viaje(entrada_usuario):
     # Additional prompt for things to bring, visa requirements, vaccines, and electricity adapters
-    prompt = f"Dados los siguientes detalles sobre mi próximo viaje:\n\n{entrada_usuario}\n\nPor favor, proporciona sugerencias de viaje personalizadas, incluyendo cosas que hacer, lugares para alojarse, restaurantes recomendados y cualquier otra información relevante basada en los detalles proporcionados.\n\nAdemás, incluye información sobre cosas que llevar, requisitos de visa, vacunas necesarias y adaptadores de electricidad específicos para el destino."
+    prompt = f"Dados los siguientes detalles sobre mi próximo viaje:\n\n{entrada_usuario}\n\nPor favor, proporciona sugerencias de viaje personalizadas."
+#incluyendo cosas que hacer, lugares para alojarse, restaurantes recomendados y cualquier otra información relevante basada en los detalles proporcionados.\n\nAdemás, incluye información sobre cosas que llevar, requisitos de visa, vacunas necesarias y adaptadores de electricidad específicos para el destino.
     respuesta = cliente.chat.completions.create(
         model="gpt-3.5-turbo",  # Specify the GPT-3 engine
         messages=[
