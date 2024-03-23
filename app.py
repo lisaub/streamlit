@@ -6,11 +6,16 @@ import os
 # Load environment variables from the .env file
 load_dotenv()
 
-# Get your OpenAI API key from secrets
-api_key = st.secrets["openai"]["api_key"]
 
-# Set your OpenAI API key
-cliente = OpenAI(api_key)
+# Get your OpenAI API key from secrets or environment variables
+api_key = st.secrets.get("openai", {}).get("api_key") or os.getenv("OPENAI_API_KEY")
+
+# Check if the API key is available
+if api_key is None:
+    st.error("OpenAI API key is not available. Please make sure it's set up correctly.")
+else:
+    # Set your OpenAI API key
+    cliente = OpenAI(api_key)
 
 # Set your OpenAI API key
 # cliente = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
